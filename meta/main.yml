@@ -1,0 +1,13 @@
+galaxy_info:
+  author: Sebastian Zawadzki
+  description: ConfigServer Firewall installation and configuration
+  license: BSD-3-Clause
+
+  min_ansible_version: 2.1
+
+  platforms:
+  - name: AlmaLinux
+    versions:
+    - 8.3
+
+  galaxy_tags: [csf, firewall, configserver]
