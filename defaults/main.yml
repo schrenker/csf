@@ -1,0 +1,17 @@
+---
+csf_docker: "0"
+csf_whitelist: []
+csf_tcp_in: "20,21,22,25,53,80,110,143,443,465,587,993,995"
+csf_tcp_out: "20,21,22,25,53,80,110,113,443,587,993,995"
+csf_udp_in: "20,21,53,80,443"
+csf_udp_out: "20,21,53,113,123"
+csf_icmp_in: "1"
+csf_icmp_out: "1"
+csf_eth_device: ""
+csf_deny_ip_limit: "200"
+csf_global_allow: ""
+csf_global_deny: ""
+csf_ports_sshd: "22"
+csf_checksum: sha256:667b041c176fbf5fbc8fe393b2779138b70995033fbb323106fa7dfbcc2d647e
+csf_tgz: /tmp/csf.tgz
+csf_unpack: /tmp
