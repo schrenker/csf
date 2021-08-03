@@ -13,13 +13,13 @@
   when: firewalld_service.stat.exists
 
 - name: Remove nftables
-  dnf:
+  yum:
     name: nftables
     state: absent
   become: true
 
 - name: Install dependencies
-  dnf:
+  yum:
     name:
       - iptables
       - perl-core
@@ -50,61 +50,34 @@
     creates: "/etc/csf/csf.conf"
   become: true
 
-- name: Apply configuration from variables to /etc/csf/csf.conf
-  lineinfile:
+- name: Apply firewall configuration to /etc/csf/csf.conf
+  template:
+    src: "templates/{{ csf_conf_template }}"
     dest: /etc/csf/csf.conf
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
-  loop:
-    - { regexp: '^TCP_IN =', line: 'TCP_IN = "{{ csf_tcp_in }}"' }
-    - { regexp: '^TCP_OUT =', line: 'TCP_OUT = "{{ csf_tcp_out }}"' }
-    - { regexp: '^UDP_IN =', line: 'UDP_IN = "{{ csf_udp_in }}"' }
-    - { regexp: '^UDP_OUT =', line: 'UDP_OUT = "{{ csf_udp_out }}"' }
-    - { regexp: '^ICMP_IN =', line: 'ICMP_IN = "{{ csf_icmp_in }}"' }
-    - { regexp: '^ICMP_OUT =', line: 'ICMP_OUT = "{{ csf_icmp_out }}"' }
-    - { regexp: '^ETH_DEVICE =', line: 'ETH_DEVICE = "{{ csf_eth_device }}"' }
-    - { regexp: '^DENY_IP_LIMIT =', line: 'DENY_IP_LIMIT = "{{ csf_deny_ip_limit }}"' }
-    - { regexp: '^GLOBAL_ALLOW =', line: 'GLOBAL_ALLOW = "{{ csf_global_allow }}"' }
-    - { regexp: '^GLOBAL_DENY =', line: 'GLOBAL_DENY = "{{ csf_global_deny }}"' }
-    - { regexp: '^DOCKER =', line: 'DOCKER = "{{ csf_docker }}"' }
+    owner: root
+    group: root
+    mode: 0600
   become: true
+  notify:
+    - Restart CSF
+    - Restart LFD
 
-- name: Whitelist defined addresses
-  lineinfile:
-    dest: /etc/csf/csf.allow
-    line: "{{ item }}"
-  loop: "{{ csf_whitelist }}"
-  become: true
-
-
-- name: Blacklist defined addresses
-  lineinfile:
-    dest: /etc/csf/csf.deny
-    line: "{{ item }}"
-  loop: "{{ csf_blacklist }}"
-  become: true
-
-- name: Disable "TESTING" in csf.conf
-  lineinfile:
-    dest: /etc/csf/csf.conf
-    regexp: "^TESTING ="
-    line: 'TESTING = "0"'
-  become: true
-
-- name: Ensure CSF is enabled and started in systemd
+- name: Ensure CSF is started and enabled in systemd
   service:
     name: csf
-    enabled: true
     state: started
+    enabled: true
   become: true
+  async: 15
+  poll: 5
+  register: csfstarted
 
-- name: Ensure LFD is enabled and started in systemd
+- name: Ensure LFD is started and enabled in systemd
   service:
     name: lfd
-    enabled: true
     state: started
+    enabled: true
   become: true
-
-- name: Reload CSF & LFD rules
-  command: csf -ra
-  become: true
+  async: 15
+  poll: 5
+  register: lfdstarted
