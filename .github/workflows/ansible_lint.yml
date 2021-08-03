@@ -17,4 +17,5 @@ jobs:
           tasks/main.yml
           handlers/main.yml
           defaults/main.yml
+          meta/main.yml
         args: ""

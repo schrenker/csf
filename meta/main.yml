@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: csf-role
+  role_name: csf_role
   author: Sebastian Zawadzki
   description: ConfigServer Firewall installation and configuration
   license: BSD-3-Clause
