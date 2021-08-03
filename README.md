@@ -1,12 +1,30 @@
 CSF
 =========
 
-Ansible role used to install ConfigServer Firewall.
+Ansible role used to install ConfigServer Firewall.  
+
+This role was tested on following systems:  
+
+- centOS 8
+- centOS 7
+- AlmaLinux 8
+
+This role is designed purely for RHEL based distros.  
 
 Role Variables
 --------------
 
-Soon to be added, covers most of CSF options + installation options.
+Most of the variables cover configuration options of CSF from /etc/csf/csf.conf file. These variables take default CSF values, and are defined as csf_<csf.conf_option_name> in lowercase.  
+
+### Notable variables:  
+
+csf_checksum - sha256 checksum of downloaded tgz file  
+csf_tgz - path to downloaded tgz file  
+csf_unpack - directory where tgz archive is unpacked  
+
+csf_conf_template - By default "csf.conf.truncated.j2" - Default CSF config file provides verbose descriptions to every available option. This role sends file without these descriptions, resulting in smaller file. To revert this, change variable value to "csf.conf.j2"  
+
+csf_testing - By default in CSF, this takes value of 1. This role sets this value to 0 immediately in order to launch LFD daemon. Override this variable to disable LFD daemon.  
 
 
 Example Playbook
@@ -28,7 +46,7 @@ BSD
 Author Information
 ------------------
 
-Sebastian Zawadzki
-zawadzkis95@gmail.com
-https://github.com/schrenker
+Sebastian Zawadzki  
+zawadzkis95@gmail.com  
+https://github.com/schrenker  
 

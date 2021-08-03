@@ -6,8 +6,9 @@ galaxy_info:
   min_ansible_version: 2.1
 
   platforms:
-  - name: AlmaLinux
+  - name: EL
     versions:
-    - 8.3
+    - 8
+    - 7
 
   galaxy_tags: [csf, firewall, configserver]
