@@ -25,7 +25,7 @@
       - perl-core
       - perl-libwww-perl
       - perl-LWP-Protocol-https
-    state: latest
+    state: installed
   become: true
 
 - name: Pull ConfigServer Firewall package
@@ -44,9 +44,9 @@
   become: true
 
 - name: Install csf
-  shell:
+  command:
     chdir: "{{ csf_unpack }}/csf"
-    cmd: "{{ csf_unpack }}/csf/install.sh"
+    cmd: "sh {{ csf_unpack }}/csf/install.sh"
     creates: "/etc/csf/csf.conf"
   become: true
 
