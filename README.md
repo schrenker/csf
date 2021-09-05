@@ -1,7 +1,7 @@
 CSF
 =========
 
-![Ansible Lint](https://github.com/schrenker/csf/actions/workflows/ansible_lint.yml/badge.svg)
+[![CSF](https://github.com/schrenker/csf/actions/workflows/ansible_lint.yml/badge.svg)](https://github.com/schrenker/csf/actions/workflows/ansible_lint.yml)
 
 Ansible role used to install ConfigServer Firewall.  
 

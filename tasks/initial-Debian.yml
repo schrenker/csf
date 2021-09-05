@@ -1,0 +1,14 @@
+---
+- include_tasks: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install required dependencies
+  apt:
+    name:
+      - libmodule-install-perl
+      - iptables
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+...
