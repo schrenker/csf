@@ -1,32 +1,9 @@
 ---
-- name: Check if firewalld service exists
-  stat: path=/usr/lib/systemd/system/firewalld.service
-  register: firewalld_service
-
-- name: Ensure that firewalld is completely disabled
-  service:
-    name: firewalld
-    state: stopped
-    enabled: false
-    masked: true
-  become: true
-  when: firewalld_service.stat.exists
-
-- name: Remove nftables
-  yum:
-    name: nftables
-    state: absent
-  become: true
-
-- name: Install dependencies
-  yum:
-    name:
-      - iptables
-      - perl-core
-      - perl-libwww-perl
-      - perl-LWP-Protocol-https
-    state: installed
-  become: true
+- name: Run distibution specific tasks
+  include_tasks: "{{ item }}"
+  with_first_found:
+  - "initial-{{ ansible_distribution }}.yml"
+  - "initial-{{ ansible_os_family }}.yml"
 
 - name: Pull ConfigServer Firewall package
   get_url:
@@ -62,7 +39,7 @@
     - Restart CSF
     - Restart LFD
 
-- name: Ensure CSF is started and enabled in systemd
+- name: Ensure CSF service is started and enabled
   service:
     name: csf
     state: started
@@ -72,7 +49,7 @@
   poll: 5
   register: csfstarted
 
-- name: Ensure LFD is started and enabled in systemd
+- name: Ensure LFD service is started and enabled
   service:
     name: lfd
     state: started
@@ -81,3 +58,4 @@
   async: 15
   poll: 5
   register: lfdstarted
+...

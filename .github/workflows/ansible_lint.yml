@@ -1,21 +1,28 @@
-name: Ansible Lint
+# yamllint disable-file
+---
+name: CSF
 
 on: [push, pull_request]
 
 jobs:
-  build:
+  lint:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@master
-      with:
-        targets: |
-          tasks/main.yml
-          handlers/main.yml
-          defaults/main.yml
-          meta/main.yml
-        args: ""
+      - name: Lint .yml files
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: .
+
+      - name: Lint Ansible Playbook
+        uses: ansible/ansible-lint-action@master
+        with:
+          targets: |
+            tasks/main.yml
+            handlers/main.yml
+            defaults/main.yml
+            meta/main.yml
+          args: ""

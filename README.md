@@ -7,9 +7,10 @@ Ansible role used to install ConfigServer Firewall.
 
 This role was tested on following systems:  
 
-- centOS 8
 - centOS 7
+- centOS 8
 - AlmaLinux 8
+- Rocky Linux 8
 
 This role is designed purely for RHEL based distros.  
 

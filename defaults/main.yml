@@ -1,4 +1,5 @@
 ---
+# yamllint disable-line rule:line-length
 csf_checksum: sha256:667b041c176fbf5fbc8fe393b2779138b70995033fbb323106fa7dfbcc2d647e
 csf_tgz: /tmp/csf.tgz
 csf_unpack: /tmp
@@ -334,7 +335,8 @@ csf_st_mysql_host: "localhost"
 csf_st_apache: "0"
 csf_st_diskw: "0"
 csf_st_diskw_freq: "5"
-csf_st_diskw_dd: "if=/dev/zero of=/var/lib/csf/dd_test bs=1MB count=64 conv=fdatasync"
+csf_st_diskw_dd: >
+  "if=/dev/zero of=/var/lib/csf/dd_test bs=1MB count=64 conv=fdatasync"
 csf_docker: "0"
 csf_docker_device: "docker0"
 csf_docker_network4: "172.17.0.0/16"
