@@ -1,0 +1,8 @@
+---
+- name: Remove UFW with apt
+  apt:
+    name: ufw
+    state: absent
+    purge: true
+  become: true
+...

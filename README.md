@@ -1,7 +1,7 @@
 CSF
 =========
 
-![Ansible Lint](https://github.com/schrenker/csf/actions/workflows/ansible_lint.yml/badge.svg)
+[![CSF](https://github.com/schrenker/csf/actions/workflows/ansible_lint.yml/badge.svg)](https://github.com/schrenker/csf/actions/workflows/ansible_lint.yml)
 
 Ansible role used to install ConfigServer Firewall.  
 
@@ -11,8 +11,12 @@ This role was tested on following systems:
 - centOS 8
 - AlmaLinux 8
 - Rocky Linux 8
-
-This role is designed purely for RHEL based distros.  
+- Debian 9
+- Debian 10
+- Ubuntu 18.04
+- Ubuntu 20.04
+- Ubuntu 20.10
+- Ubuntu 21.04
 
 Role Variables
 --------------
