@@ -1,11 +1,11 @@
 # yamllint disable-file
 ---
-name: Ansible Lint
+name: Yamllint
 
 on: [push, pull_request]
 
 jobs:
-  build:
+  yamllint:
 
     runs-on: ubuntu-latest
 
