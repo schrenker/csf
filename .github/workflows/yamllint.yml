@@ -1,0 +1,16 @@
+# yamlling disable-file
+---
+name: 'Yamllint GitHub Actions'
+on:
+  - [push, pull_request]
+jobs:
+  yamllint:
+    name: 'Yamllint'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Yamllint'
+        uses: karancode/yamllint-github-action@master
+        with:
+          yamllint_file_or_dir: .
+          yamllint_strict: false
+          yamllint_comment: false

@@ -1,3 +1,4 @@
+---
 galaxy_info:
   role_name: csf
   author: Sebastian Zawadzki
@@ -7,9 +8,9 @@ galaxy_info:
   min_ansible_version: 2.1
 
   platforms:
-  - name: EL
-    versions:
-    - 8
-    - 7
+    - name: EL
+      versions:
+        - 8
+        - 7
 
   galaxy_tags: [csf, firewall, configserver]
