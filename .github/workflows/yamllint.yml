@@ -1,16 +1,18 @@
-# yamlling disable-file
+# yamllint disable-file
 ---
-name: 'Yamllint GitHub Actions'
-on:
-  - [push, pull_request]
+name: Ansible Lint
+
+on: [push, pull_request]
+
 jobs:
-  yamllint:
-    name: 'Yamllint'
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: 'Yamllint'
-        uses: karancode/yamllint-github-action@master
+      - uses: actions/checkout@v2
+
+      - name: Lint .yml files
+        uses: ibiqlik/action-yamllint@v3
         with:
-          yamllint_file_or_dir: .
-          yamllint_strict: false
-          yamllint_comment: false
+          file_or_dir: .

@@ -12,12 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@master
-      with:
-        targets: |
-          tasks/main.yml
-          handlers/main.yml
-          defaults/main.yml
-          meta/main.yml
-        args: ""
+      - name: Lint Ansible Playbook
+        uses: ansible/ansible-lint-action@master
+        with:
+          targets: |
+            tasks/main.yml
+            handlers/main.yml
+            defaults/main.yml
+            meta/main.yml
+          args: ""
