@@ -1,0 +1,17 @@
+---
+- name: Remove nftables
+  dnf:
+    name: nftables
+    state: absent
+  become: true
+
+- name: Install dependencies
+  dnf:
+    name:
+      - iptables
+      - perl-core
+      - perl-libwww-perl
+      - perl-LWP-Protocol-https
+    state: installed
+  become: true
+...
