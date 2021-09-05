@@ -1,11 +1,8 @@
 ---
-- name: Disable UFW Firewall
-  command: ufw disable
-  become: true
-
 - name: Remove UFW with apt
-  apt: ufw
-  state: absent
-  purge: true
+  apt:
+    name: ufw
+    state: absent
+    purge: true
   become: true
 ...

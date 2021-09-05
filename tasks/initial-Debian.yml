@@ -1,4 +1,11 @@
 ---
+- name: Change SYSTEMCTL CSF parameter for older ubuntu and debian versions
+  set_fact:
+    csf_systemctl: "/bin/systemctl"
+  # yamllint disable-line rule:line-length
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "18") or
+          (ansible_distribution == "Debian" and ansible_distribution_major_version == "9")
+
 - include_tasks: Ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 
