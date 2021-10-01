@@ -42,9 +42,9 @@ For base installation with default values, there is no need to define any variab
     - hosts: servers
         roles:
             - role: csf
-            csf_tcp_out: "22, 25, 80, 443"
-            csf_tcp_in: "22, 80"
-            csf_docker: "1"
+              csf_tcp_out: "22, 25, 80, 443"
+              csf_tcp_in: "22, 80"
+              csf_docker: "1"
 License
 -------
 
