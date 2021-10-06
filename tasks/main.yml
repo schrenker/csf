@@ -64,7 +64,9 @@
     - Restart LFD
 
 - name: Check if preconfiguration file exists
-  local_action: stat path="{{ csf_presh }}"
+  stat:
+    path: "{{ csf_presh }}"
+  delegate_to: localhost
   register: csfpreconfiguration
 
 - name: Copy preconfiguration file to /etc/csf/csfpre.sh
@@ -81,7 +83,9 @@
   when: csfpreconfiguration.stat.exists
 
 - name: Check if postconfiguration file exists
-  local_action: stat path="{{ csf_postsh }}"
+  stat:
+    path: "{{ csf_postsh }}"
+  delegate_to: localhost
   register: csfpostconfiguration
 
 - name: Copy postconfiguration file to /etc/csf/csfpost.sh
