@@ -39,6 +39,30 @@
     - Restart CSF
     - Restart LFD
 
+- name: Apply csf.allow file to /etc/csf/csf.allow
+  template:
+    src: "templates/csf.allow.j2"
+    dest: /etc/csf/csf.allow
+    owner: root
+    group: root
+    mode: 0600
+  become: true
+  notify:
+    - Restart CSF
+    - Restart LFD
+
+- name: Apply csf.deny file to /etc/csf/csf.deny
+  template:
+    src: "templates/csf.deny.j2"
+    dest: /etc/csf/csf.deny
+    owner: root
+    group: root
+    mode: 0600
+  become: true
+  notify:
+    - Restart CSF
+    - Restart LFD
+
 - name: Ensure CSF service is started and enabled
   service:
     name: csf
