@@ -409,5 +409,5 @@ csf_ports_sshd: "22"
 csf_generic: "1"
 csf_debug: "0"
 
-csf_whitelist: []
-csf_blacklist: []
+csf_allowlist: []
+csf_denylist: []
