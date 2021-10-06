@@ -411,5 +411,6 @@ csf_debug: "0"
 
 csf_allowlist: []
 csf_denylist: []
+csf_ignorelist: []
 csf_presh: ""
 csf_postsh: ""

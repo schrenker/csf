@@ -63,6 +63,18 @@
     - Restart CSF
     - Restart LFD
 
+- name: Apply csf.ignore file to /etc/csf/csf.ignore
+  template:
+    src: "templates/csf.ignore.j2"
+    dest: /etc/csf/csf.ignore
+    owner: root
+    group: root
+    mode: 0600
+  become: true
+  notify:
+    - Restart CSF
+    - Restart LFD
+
 - name: Check if preconfiguration file exists
   stat:
     path: "{{ csf_presh }}"
