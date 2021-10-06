@@ -17,6 +17,4 @@
 # See readme.txt for more information regarding advanced port filtering
 #
 
-{% for host in csf_blacklist %}
-  "{{ host }}"
-{% endfor %}
+{{ csf_blacklist | join('\n') }}
