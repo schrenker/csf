@@ -63,6 +63,44 @@
     - Restart CSF
     - Restart LFD
 
+- name: Check if preconfiguration file exists
+  stat:
+    path: "{{ csf_presh }}"
+  delegate_to: localhost
+  register: csfpreconfiguration
+
+- name: Copy preconfiguration file to /etc/csf/csfpre.sh
+  copy:
+    src: "{{ csf_presh }}"
+    dest: /etc/csf/csfpre.sh
+    owner: root
+    group: root
+    mode: "0700"
+  become: true
+  notify:
+    - Restart CSF
+    - Restart LFD
+  when: csfpreconfiguration.stat.exists
+
+- name: Check if postconfiguration file exists
+  stat:
+    path: "{{ csf_postsh }}"
+  delegate_to: localhost
+  register: csfpostconfiguration
+
+- name: Copy postconfiguration file to /etc/csf/csfpost.sh
+  copy:
+    src: "{{ csf_postsh }}"
+    dest: /etc/csf/csfpost.sh
+    owner: root
+    group: root
+    mode: "0700"
+  become: true
+  notify:
+    - Restart CSF
+    - Restart LFD
+  when: csfpostconfiguration.stat.exists
+
 - name: Ensure CSF service is started and enabled
   service:
     name: csf

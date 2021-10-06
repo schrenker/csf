@@ -7,16 +7,16 @@ Ansible role used to install ConfigServer Firewall.
 
 This role was tested on following systems:  
 
-- centOS 7
-- centOS 8
-- AlmaLinux 8
-- Rocky Linux 8
-- Debian 9
-- Debian 10
-- Ubuntu 18.04
-- Ubuntu 20.04
-- Ubuntu 20.10
-- Ubuntu 21.04
+- centOS 7  
+- centOS 8  
+- AlmaLinux 8  
+- Rocky Linux 8  
+- Debian 9  
+- Debian 10  
+- Ubuntu 18.04  
+- Ubuntu 20.04  
+- Ubuntu 20.10  
+- Ubuntu 21.04  
 
 Role Variables
 --------------
@@ -37,7 +37,7 @@ csf_testing - By default in CSF, this takes value of 1. This role sets this valu
 Example Playbook
 ----------------
 
-For base installation with default values, there is no need to define any variables. However, if you want to change any of the CSF settings, do it directly in role variables.
+For base installation with default values, there is no need to define any variables. However, if you want to change any of the CSF settings, do it directly in role variables.  
 
 ``` yaml
 - hosts: servers
@@ -48,12 +48,14 @@ For base installation with default values, there is no need to define any variab
     csf_tcp_out: "22, 25, 80, 113, 443"
     csf_allowlist: [8.8.8.8, 8.8.4.4]
     csf_denylist: [1.1.1.1, 1.1.2.2]
+    csf_presh: "./local_bash_script"
+    csf_postsh: "./another_local_bash_script"
 ```
 
 License
 -------
 
-BSD
+BSD  
 
 Author Information
 ------------------
