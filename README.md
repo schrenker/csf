@@ -48,6 +48,7 @@ For base installation with default values, there is no need to define any variab
     csf_tcp_out: "22, 25, 80, 113, 443"
     csf_allowlist: [8.8.8.8, 8.8.4.4]
     csf_denylist: [1.1.1.1, 1.1.2.2]
+    csf_ignorelist: [192.168.0.1]
     csf_presh: "./local_bash_script"
     csf_postsh: "./another_local_bash_script"
 ```
