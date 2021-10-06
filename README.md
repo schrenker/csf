@@ -39,12 +39,17 @@ Example Playbook
 
 For base installation with default values, there is no need to define any variables. However, if you want to change any of the CSF settings, do it directly in role variables.
 
-    - hosts: servers
-        roles:
-            - role: csf
-              csf_tcp_out: "22, 25, 80, 443"
-              csf_tcp_in: "22, 80"
-              csf_docker: "1"
+``` yaml
+- hosts: servers
+  roles:
+  - role: csf
+    csf_docker: "1"
+    csf_tcp_in: "22, 25, 443"
+    csf_tcp_out: "22, 25, 80, 113, 443"
+    csf_allowlist: [8.8.8.8, 8.8.4.4]
+    csf_denylist: [1.1.1.1, 1.1.2.2]
+```
+
 License
 -------
 
