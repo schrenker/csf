@@ -33,6 +33,8 @@ csf_conf_template - By default "csf.conf.truncated.j2" - Default CSF config file
 
 csf_testing - By default in CSF, this takes value of 1. This role sets this value to 0 immediately in order to launch LFD daemon. Override this variable to disable LFD daemon.  
 
+csf_installed - This step will omit installing CSF from scratch, and will apply only the configuration changes. Defaults to false, you can set it after installation for each host to true.  
+
 
 Example Playbook
 ----------------
@@ -62,6 +64,6 @@ Author Information
 ------------------
 
 Sebastian Zawadzki  
-zawadzkis95@gmail.com  
+sebastian@zawadzki.tech  
 https://github.com/schrenker  
 
