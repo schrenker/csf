@@ -4,13 +4,14 @@
   with_first_found:
   - "initial-{{ ansible_distribution }}.yml"
   - "initial-{{ ansible_os_family }}.yml"
+  when: not csf_installed
 
 - name: Pull ConfigServer Firewall package
   get_url:
     url: "https://download.configserver.com/csf.tgz"
     dest: "{{ csf_tgz }}"
-    checksum: "{{ csf_checksum }}"
   become: true
+  when: not csf_installed
 
 - name: Extract csf.tgz
   unarchive:
@@ -19,6 +20,7 @@
     remote_src: true
     creates: "{{ csf_unpack }}/csf/install.sh"
   become: true
+  when: not csf_installed
 
 - name: Install csf
   command:
@@ -26,6 +28,7 @@
     cmd: "sh {{ csf_unpack }}/csf/install.sh"
     creates: "/etc/csf/csf.conf"
   become: true
+  when: not csf_installed
 
 - name: Apply firewall configuration to /etc/csf/csf.conf
   template:
