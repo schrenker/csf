@@ -1,6 +1,6 @@
 ---
 - name: Restart CSF
-  service:
+  ansible.builtin.service:
     name: csf
     state: restarted
     enabled: true
@@ -10,7 +10,7 @@
   when: csfstarted is not changed
 
 - name: Restart LFD
-  service:
+  ansible.builtin.service:
     name: lfd
     state: restarted
     enabled: true

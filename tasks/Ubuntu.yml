@@ -1,6 +1,6 @@
 ---
 - name: Remove UFW with apt
-  apt:
+  ansible.builtin.apt:
     name: ufw
     state: absent
     purge: true

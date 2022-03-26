@@ -7,14 +7,15 @@
   when: not csf_installed
 
 - name: Pull ConfigServer Firewall package
-  get_url:
+  ansible.builtin.get_url:
     url: "https://download.configserver.com/csf.tgz"
     dest: "{{ csf_tgz }}"
+    mode: 0600
   become: true
   when: not csf_installed
 
 - name: Extract csf.tgz
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ csf_tgz }}"
     dest: "{{ csf_unpack }}"
     remote_src: true
@@ -23,7 +24,7 @@
   when: not csf_installed
 
 - name: Install csf
-  command:
+  ansible.builtin.command:
     chdir: "{{ csf_unpack }}/csf"
     cmd: "sh {{ csf_unpack }}/csf/install.sh"
     creates: "/etc/csf/csf.conf"
@@ -31,7 +32,7 @@
   when: not csf_installed
 
 - name: Apply firewall configuration to /etc/csf/csf.conf
-  template:
+  ansible.builtin.template:
     src: "templates/{{ csf_conf_template }}"
     dest: /etc/csf/csf.conf
     owner: root
@@ -43,7 +44,7 @@
     - Restart LFD
 
 - name: Apply csf.allow file to /etc/csf/csf.allow
-  template:
+  ansible.builtin.template:
     src: "templates/csf.allow.j2"
     dest: /etc/csf/csf.allow
     owner: root
@@ -55,7 +56,7 @@
     - Restart LFD
 
 - name: Apply csf.deny file to /etc/csf/csf.deny
-  template:
+  ansible.builtin.template:
     src: "templates/csf.deny.j2"
     dest: /etc/csf/csf.deny
     owner: root
@@ -67,7 +68,7 @@
     - Restart LFD
 
 - name: Apply csf.ignore file to /etc/csf/csf.ignore
-  template:
+  ansible.builtin.template:
     src: "templates/csf.ignore.j2"
     dest: /etc/csf/csf.ignore
     owner: root
@@ -79,13 +80,13 @@
     - Restart LFD
 
 - name: Check if preconfiguration file exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ csf_presh }}"
   delegate_to: localhost
   register: csfpreconfiguration
 
 - name: Copy preconfiguration file to /etc/csf/csfpre.sh
-  copy:
+  ansible.builtin.copy:
     src: "{{ csf_presh }}"
     dest: /etc/csf/csfpre.sh
     owner: root
@@ -98,13 +99,13 @@
   when: csfpreconfiguration.stat.exists
 
 - name: Check if postconfiguration file exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ csf_postsh }}"
   delegate_to: localhost
   register: csfpostconfiguration
 
 - name: Copy postconfiguration file to /etc/csf/csfpost.sh
-  copy:
+  ansible.builtin.copy:
     src: "{{ csf_postsh }}"
     dest: /etc/csf/csfpost.sh
     owner: root
@@ -117,7 +118,7 @@
   when: csfpostconfiguration.stat.exists
 
 - name: Ensure CSF service is started and enabled
-  service:
+  ansible.builtin.service:
     name: csf
     state: started
     enabled: true
@@ -127,7 +128,7 @@
   register: csfstarted
 
 - name: Ensure LFD service is started and enabled
-  service:
+  ansible.builtin.service:
     name: lfd
     state: started
     enabled: true

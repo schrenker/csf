@@ -1,0 +1,8 @@
+---
+version: '3'
+
+tasks:
+  lint:
+    cmds:
+      - act --container-architecture linux/amd64
+...
