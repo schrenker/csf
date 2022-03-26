@@ -1,12 +1,12 @@
 ---
 - name: Remove nftables
-  yum:
+  ansible.builtin.yum:
     name: nftables
     state: absent
   become: true
 
 - name: Install dependencies
-  yum:
+  ansible.builtin.yum:
     name:
       - iptables
       - perl-core

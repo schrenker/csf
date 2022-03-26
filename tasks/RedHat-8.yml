@@ -1,12 +1,12 @@
 ---
 - name: Remove nftables
-  dnf:
+  ansible.builtin.dnf:
     name: nftables
     state: absent
   become: true
 
 - name: Install dependencies
-  dnf:
+  ansible.builtin.dnf:
     name:
       - iptables
       - perl-core
